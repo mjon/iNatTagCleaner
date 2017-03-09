@@ -1,8 +1,11 @@
 # iNatTagCleaner
+
+## What's it for
 iNaturalist (http://inaturalist.org) is a great place to post nature observations. Its photo upload tool imports all the tags in photos, unless you manually edit them out during upload. That is tedious when bulk uploading lots of photos that contain some inappropriate tags (like people's names or machine tags that get misinterpreted by iNat). To save time, this bash script strips all the tags from my photos except my iNaturalist tags.
 
 I only want a subset of my tags included in my uploads. For example, I don't want people's names shared, but I still want to tag them on my computer. I also add EOL higher taxonomy tags to my photos so I can search for higher taxa when I need to (I'm a biologist) but these are both unncessary on iNat and get misinterpreted as field data (for example, "taxonomy:kingdom=Animalia" gets turned into the entry "Animalia" in the field "kingdom" which iNat doesn't need). My bash script is my solution to this. It takes a folder of jpg images exported from my photolibrary and uses exiftool to remove all tags from these photos except the tags I want to go to iNaturalist.
 
+## How this fits into my iNaturalist workflow
 My photo workflow is as follows.
 
 1. Import photos to Darktable (http://www.darktable.org/)
@@ -17,6 +20,14 @@ My photo workflow is as follows.
 
 6. All those photos are then dragged onto the iNaturalist add observation page (https://www.inaturalist.org/observations/upload), which automatically assigns each observation a species name from my tags, gets any observation field values from my tags, and it adds all my tags as observation tags. The only manual thing to do, if necessary, is to combine multiple photos into single observations. Submit, delete the exported images from my iNaturalist folder, and I'm done.
 
+## Useful for other things?
 My bash script could be modified for other tag-stripping purposes, as long as the tags you want to keep are consistently labelled.
 
+## I'm no programmer
 Note that I'm a newbie to bash scripting so I'm sure my code could be written more efficiently. It works though. :-)
+
+## Requirements and Disclaimer:
+You'll need to have exiftool installed on your computer for the bash script to work (it's free, http://www.sno.phy.queensu.ca/~phil/exiftool/).
+I built this for my own use.
+It is not an official product of iNaturalist.
+Use at your own risk.
