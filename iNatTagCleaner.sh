@@ -4,7 +4,9 @@
 # author: Jon Sullivan (jon.j.sullivan@me.com)
 # Creative Commons CC0
 
-# this script cleans up the tags in all the photos in one folder, which I call  "NatureWatchNZ_temp_uploads", removing all tags except those appropriate for uploading to NatureWatch NZ/iNaturalist (naturewatch.org.nz/inaturalist.org).
+# this script cleans up the tags in all the photos in one folder, which I call  "iNat_temp_uploads", removing all tags except those appropriate for uploading to iNaturalist (inaturalist.org) or its New Zealand chapter NatureWatch NZ (naturewatch.org.nz).
+
+# for this to work, you'll need exiftool installed: http://www.sno.phy.queensu.ca/~phil/exiftool/
 
 # this script retains all tags beginning with "Species|", "Places|", "iNaturalist field|", or "iNaturalist tag|". Every other tag gets removed.
 
@@ -15,7 +17,7 @@
 # iteratively load each jpg image file in the folder
 # change the file path in this line if you're not Jon
 # note that I'm using this for images exported from Darktable which always have .jpg in lower case. You'll have to modify this if you have a mix of .JPG and .jpg
-for file in /Users/jonsullivan/Pictures/NatureWatchNZ_temp_uploads/*.jpg
+for file in /Users/jonsullivan/Pictures/iNat_temp_uploads/*.jpg
 
 # for each file in the folder, do the following tag manipulation
 do
