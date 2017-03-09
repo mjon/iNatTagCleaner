@@ -5,12 +5,17 @@ I only want a subset of my tags included in my uploads. For example, I don't wan
 
 My photo workflow is as follows.
 
-1) Import photos to Darktable (http://www.darktable.org/)
-2) Geotag DSLR photos without locations using GPX files (I track where I go using the Cyclemeter app on my iPhone)
-3) Add lots of tags to my photos. This includes the place name, entered as a hierarchical tag in Darktable starting with "Places|", e.g., "Places|New Zealand|South Island|Canterbury|Banks Peninsula|Akaroa harbour|Hinewai Reserve". It also contains heirarchical tags for the notable species in the photo, tagged starting with "Species|" and including EOL machine tags for the higher taxonomy, e.g., "Species|taxonomy:kingdom=Animalia|taxonomy:phylum=Arthropoda|taxonomy:class=Insecta|taxonomy:order=Lepidoptera|taxonomy:family=Erebidae|taxonomy:genus=Nyctemera|taxonomy:binomial=Nyctemera annulata|taxonomy:common=Magpie moth|Magpie moth|Nyctemera annulata". Any tags I want shared as tags in iNaturalist get prefaced with "iNaturalist tag|" (e.g. "iNaturalist tag|Garden"). Any tags I want to become observation field values in iNaturalist (http://inaturalist.org/observation_fields) start with "iNaturalist field|", e.g., "iNaturalist field|Insect life stage=adult" (the observation field needs to already exist on iNat for that to work). None of my other tags, like the people in the photo, or the event name, match those Place, Species, or iNaturalist formats.
-4) Export the photos I want to send to iNaturalist to one folder on my computer
-5) Run my bash script 'iNatTagCleaner.sh' in the Terminal app on my Mac. It automatically strips out all the tags except those starting with "iNaturalist field|", "iNaturalist tag|", "Species|", and "Places|" from all the photos in the folder, using the awesome power of exiftool (http://www.sno.phy.queensu.ca/~phil/exiftool/).
-6) All those photos are then dragged onto the iNaturalist add observation page (https://www.inaturalist.org/observations/upload), which automatically assigns each observation a species name from my tags, gets any observation field values from my tags, and it adds all my tags as observation tags. The only manual thing to do, if necessary, is to combine multiple photos into single observations. Submit and I'm done.
+1. Import photos to Darktable (http://www.darktable.org/)
+
+2. Geotag DSLR photos without locations using GPX files (I track where I go using the Cyclemeter app on my iPhone)
+
+3. Add lots of tags to my photos. This includes the place name, entered as a hierarchical tag in Darktable starting with "Places|", e.g., "Places|New Zealand|South Island|Canterbury|Banks Peninsula|Akaroa harbour|Hinewai Reserve". It also contains heirarchical tags for the notable species in the photo, tagged starting with "Species|" and including EOL machine tags for the higher taxonomy, e.g., "Species|taxonomy:kingdom=Animalia|taxonomy:phylum=Arthropoda|taxonomy:class=Insecta|taxonomy:order=Lepidoptera|taxonomy:family=Erebidae|taxonomy:genus=Nyctemera|taxonomy:binomial=Nyctemera annulata|taxonomy:common=Magpie moth|Magpie moth|Nyctemera annulata". Any tags I want shared as tags in iNaturalist get prefaced with "iNaturalist tag|" (e.g. "iNaturalist tag|Garden"). Any tags I want to become observation field values in iNaturalist (http://inaturalist.org/observation_fields) start with "iNaturalist field|", e.g., "iNaturalist field|Insect life stage=adult" (the observation field needs to already exist on iNat for that to work). None of my other tags, like the people in the photo, or the event name, match those Place, Species, or iNaturalist formats.
+
+4. Export the photos I want to send to iNaturalist to one folder on my computer
+
+5. Run my bash script 'iNatTagCleaner.sh' in the Terminal app on my Mac. It automatically strips out all the tags except those starting with "iNaturalist field|", "iNaturalist tag|", "Species|", and "Places|" from all the photos in the folder, using the awesome power of exiftool (http://www.sno.phy.queensu.ca/~phil/exiftool/).
+
+6. All those photos are then dragged onto the iNaturalist add observation page (https://www.inaturalist.org/observations/upload), which automatically assigns each observation a species name from my tags, gets any observation field values from my tags, and it adds all my tags as observation tags. The only manual thing to do, if necessary, is to combine multiple photos into single observations. Submit and I'm done.
 
 My bash script could be modified for other tag-stripping purposes, as long as the tags you want to keep are consistently labelled.
 
