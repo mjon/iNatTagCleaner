@@ -2,7 +2,7 @@
 
 # version 1.0
 # author: Jon Sullivan (jon.j.sullivan@me.com)
-# Creative Commons CC0
+# MIT License
 
 # this script cleans up the tags in all the photos in one folder, which I call  "iNat_temp_uploads", removing all tags except those appropriate for uploading to iNaturalist (inaturalist.org) or its New Zealand chapter NatureWatch NZ (naturewatch.org.nz).
 
