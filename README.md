@@ -1,4 +1,4 @@
-# iNaturalist_cull_photo_tags
+# iNatTagCleaner
 iNaturalist (http://inaturalist.org) is a great place to post nature observations. Its photo upload tool imports all the tags in photos, unless you manually edit them out during upload. That is tedious when bulk uploading lots of photos that contain some inappropriate tags (like people's names or machine tags that get misinterpreted by iNat). To save time, this bash script strips all the tags from my photos except my iNaturalist tags.
 
 I only want a subset of my tags included in my uploads. For example, I don't want people's names shared, but I still want to tag them on my computer. I also add EOL higher taxonomy tags to my photos so I can search for higher taxa when I need to (I'm a biologist) but these are both unncessary on iNat and get misinterpreted as field data (for example, "taxonomy:kingdom=Animalia" gets turned into the entry "Animalia" in the field "kingdom" which iNat doesn't need). My bash script is my solution to this. It takes a folder of jpg images exported from my photolibrary and uses exiftool to remove all tags from these photos except the tags I want to go to iNaturalist.
