@@ -25,7 +25,7 @@ My photo workflow is as follows.
 
 5. Run my bash script 'iNatTagCleaner.sh' in the Terminal app on my Mac. It automatically strips out all the tags except those starting with "iNaturalist field|", "iNaturalist tag|", "Species|", and "Places|" from all the photos in the folder, using the awesome power of exiftool (http://www.sno.phy.queensu.ca/~phil/exiftool/).
 
-6. All those photos are then dragged onto the iNaturalist add observation page (https://www.inaturalist.org/observations/upload), which automatically assigns each observation a species name from my tags, gets any observation field values from my tags, and it adds all my tags as observation tags. The only manual thing to do, if necessary, is to combine multiple photos into single observations. Submit, delete the exported images from my iNaturalist folder, and I'm done.
+6. All those photos are then dragged onto the iNaturalist Add Observation page (https://www.inaturalist.org/observations/upload), which automatically assigns each observation a species name from my tags, gets any observation field values from my tags, and it adds all my tags as observation tags. The only manual thing to do, if necessary, is to combine multiple photos into single observations. Submit, delete the exported images from my iNaturalist folder, and I'm done.
 
 ## Useful for other things?
 My bash script could be modified for other tag-stripping purposes, as long as the tags you want to keep are consistently labelled.
