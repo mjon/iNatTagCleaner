@@ -35,8 +35,7 @@ Note that I'm a newbie to bash scripting so I'm sure my code could be written mo
 
 ## Requirements and Disclaimer:
 * You'll need to have exiftool installed on your computer for the bash script to work (it's free, http://www.sno.phy.queensu.ca/~phil/exiftool/).
-
+* The current build assumes that there are no spaces in photo file names.
 * I built this for my own use.
-
 * It is not an official product of iNaturalist.
 * Use at your own risk.
