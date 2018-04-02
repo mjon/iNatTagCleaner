@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# version 1.0
+# version 1.01
 # author: Jon Sullivan (jon.j.sullivan@me.com)
 # MIT License
 
@@ -11,11 +11,11 @@
 # this script retains all tags beginning with "Species|", "Places|", "iNaturalist field|", or "iNaturalist tag|". Every other tag gets removed.
 
 # if you're on a Mac, drag this file onto the Terminal app to run it
-# the first time you use it, don't forget to also make it executable using
+# the first time you use it. Don't forget to also make it executable using
 # chmod 700 scriptme.sh
 
-# iteratively load each jpg image file in the folder
-# change the file path in this line if you're not Jon
+# the next code line iteratively loads up each jpg image file in the folder
+# change the file path on this line if you're not jonsullivan
 # note that I'm using this for images exported from Darktable which always have .jpg in lower case. You'll have to modify this if you have a mix of .JPG and .jpg
 for file in /Users/jonsullivan/Pictures/iNat_temp_uploads/*.jpg
 
@@ -31,6 +31,17 @@ mysubject="$(exiftool $file -HierarchicalSubject)"
 # add comma to the end (needed for a subsequent search pattern)
 mynewsubject="$(echo $mysubject | perl -pe "s/$/,/")"
 
+# remove any EOL taxon tag prefixes inside the taxonomic heirachy of tagged species names.
+# for example, "taxonomy:genus=Nyctemera" needs to become just "Nyctemera"
+# Otherwise iNaturalist interprets this as the value "Nyctemera" in the field "genus", rather than a valid taxonomic name to match
+mynewsubject="$(echo $mynewsubject | perl -pe "s/taxonomy:kingdom=//g")"
+mynewsubject="$(echo $mynewsubject | perl -pe "s/taxonomy:phylum=//g")"
+mynewsubject="$(echo $mynewsubject | perl -pe "s/taxonomy:class=//g")"
+mynewsubject="$(echo $mynewsubject | perl -pe "s/taxonomy:order=//g")"
+mynewsubject="$(echo $mynewsubject | perl -pe "s/taxonomy:family=//g")"
+mynewsubject="$(echo $mynewsubject | perl -pe "s/taxonomy:subfamily=//g")"
+mynewsubject="$(echo $mynewsubject | perl -pe "s/taxonomy:genus=//g")"
+
 # move the species name to an iNaturalist tag by adding "iNaturalist tag|" to the front of it
 # species names are at the end of a hierachical tag starting with Species|
 # this needs to look for any characters but , between Species and |species name
@@ -45,7 +56,7 @@ mynewsubject="$(echo $mynewsubject | perl -pe "s/Places\|[^,]+\|(.+?),/iNaturali
 mynewsubject="$(echo $mynewsubject | perl -pe "s/.*?(iNaturalist [tf][ia][eg].*$)/\1/")"
 
 # remove all tags after the last one that starts with iNaturalist
-mynewsubject="$(echo $mynewsubject | perl -pe "s/(iNaturalist [tf][ia][eg].*\|[A-Za-z -:=]+?,).*$/\1/")"
+mynewsubject="$(echo $mynewsubject | perl -pe "s/(iNaturalist [tf][ia][eg].*\|[A-Za-z ->:=]+?,).*$/\1/")"
 
 # remove any tags not starting with iNaturalist
 mynewsubject="$(echo $mynewsubject | perl -pe "s/, [^i][^N][^a][^t].+?, /, /g")"
