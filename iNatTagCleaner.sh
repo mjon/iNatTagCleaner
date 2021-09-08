@@ -1,23 +1,29 @@
 #!/bin/bash
 
-# version 1.01
+# version 1.04
 # author: Jon Sullivan (jon.j.sullivan@me.com)
 # MIT License
 
-# this script cleans up the tags in all the photos in one folder, which I call  "iNat_temp_uploads", removing all tags except those appropriate for uploading to iNaturalist (inaturalist.org) or its New Zealand chapter NatureWatch NZ (naturewatch.org.nz).
+# this script cleans up the tags in all the photos in one folder, which I call  "iNat_temp_uploads", removing all tags except those appropriate for uploading to iNaturalist (inaturalist.org) or its New Zealand chapter iNaturalist NZ (inaturalist.nz).
 
 # for this to work, you'll need exiftool installed: http://www.sno.phy.queensu.ca/~phil/exiftool/
 
-# this script retains all tags beginning with "Species|", "Places|", "iNaturalist field|", or "iNaturalist tag|". Every other tag gets removed.
+# this script retains all tags beginning with "Species|", "Places|", "GeoTagged|", "iNaturalist field|", or "iNaturalist tag|". Every other tag gets removed.
 
 # if you're on a Mac, drag this file onto the Terminal app to run it
-# the first time you use it. Don't forget to also make it executable using
+# the first time you use it. The first time you use it, you'll also need make it executable using
 # chmod 700 scriptme.sh
+
+# first replace any spaces in file names with "_"
+for file in /Users/jon/Pictures/iNaturalist_temp_uploads/*.jpg
+do
+	mv "$file" $(echo $file | tr ' ' '_')
+done
 
 # the next code line iteratively loads up each jpg image file in the folder
 # change the file path on this line if you're not jonsullivan
 # note that I'm using this for images exported from Darktable which always have .jpg in lower case. You'll have to modify this if you have a mix of .JPG and .jpg
-for file in /Users/jonsullivan/Pictures/iNat_temp_uploads/*.jpg
+for file in /Users/jon/Pictures/iNaturalist_temp_uploads/*.jpg
 
 # for each file in the folder, do the following tag manipulation
 do
@@ -52,6 +58,10 @@ mynewsubject="$(echo $mynewsubject | perl -pe "s/Species\|[^,]+\|(.+?),/iNatural
 # this needs to look for any characters but , between Places and |species name
 mynewsubject="$(echo $mynewsubject | perl -pe "s/Places\|[^,]+\|(.+?),/iNaturalist tag|\1,/g")"
 
+# move the geotag tag name to an iNaturalist tag by adding "iNaturalist tag|" to the front of it and removing the Geotag category
+# this needs to look for any characters but , between Species and |species name
+mynewsubject="$(echo $mynewsubject | perl -pe "s/GeoTagged\|(.+?),/iNaturalist tag|\1,/g")"
+
 # remove all tags before the first one that starts with iNaturalist
 mynewsubject="$(echo $mynewsubject | perl -pe "s/.*?(iNaturalist [tf][ia][eg].*$)/\1/")"
 
@@ -59,7 +69,10 @@ mynewsubject="$(echo $mynewsubject | perl -pe "s/.*?(iNaturalist [tf][ia][eg].*$
 mynewsubject="$(echo $mynewsubject | perl -pe "s/(iNaturalist [tf][ia][eg].*\|[A-Za-z ->:=]+?,).*$/\1/")"
 
 # remove any tags not starting with iNaturalist
-mynewsubject="$(echo $mynewsubject | perl -pe "s/, [^i][^N][^a][^t].+?, /, /g")"
+mynewsubject="$(echo $mynewsubject | perl -pe "s/, (?!iNat).+?, /, /g")"
+
+# repeat the above because this expression only catches every second consecutive instance when there are several matches one after the other
+mynewsubject="$(echo $mynewsubject | perl -pe "s/, (?!iNat).+?, /, /g")"
 
 # remove "iNaturalist field|" from the start of all iNaturalist tags
 mynewsubject="$(echo $mynewsubject | perl -pe "s/iNaturalist field\|//g")"
